@@ -1,6 +1,6 @@
 # master only
 
-name: Integrate
+name: Debug
 
 on:
   # pull_request:
