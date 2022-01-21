@@ -141,15 +141,20 @@ export default class GoRunner {
 
       // Get session credentials to pass to go
       if (!this.#credentials) {
-        const sts = new STS()
+        try {
+          const sts = new STS()
 
-        const { Credentials } = await sts
-          .getSessionToken({
-            DurationSeconds: MIN_ALLOWED_SESSION_DURATION_S, // 900-inf
-          })
-          .promise()
+          const { Credentials } = await sts
+            .getSessionToken({
+              DurationSeconds: MIN_ALLOWED_SESSION_DURATION_S, // 900-inf
+            })
+            .promise()
 
-        this.#credentials = Credentials
+          this.#credentials = Credentials
+        } catch (e) {
+          this.#credentials = {}
+        }
+
         this.#handle = setTimeout(
           this.clearCredentials.bind(this),
           SESSION_TIMEOUT_MS,
