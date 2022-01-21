@@ -162,6 +162,7 @@ export default class GoRunner {
       env: {
         ...this.#env,
         ...this.#goEnv,
+        GO111MODULE: 'on',
         AWS_ACCESS_KEY_ID: this.#credentials.AccessKeyId,
         AWS_SECRET_ACCESS_KEY: this.#credentials.SecretAccessKey,
         AWS_SESSION_TOKEN: this.#credentials.SessionToken,
